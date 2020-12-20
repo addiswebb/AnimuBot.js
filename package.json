@@ -1,0 +1,17 @@
+{
+  "name": "crunchybot",
+  "version": "1.0.0",
+  "description": "Anime bot for discord",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Addis",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "graphql": "^15.4.0",
+    "graphql-request": "^3.4.0",
+    "node-fetch": "^2.6.1"
+  }
+}
