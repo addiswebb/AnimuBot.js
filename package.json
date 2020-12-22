@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
     "graphql": "^15.4.0",
     "graphql-request": "^3.4.0",
     "node-fetch": "^2.6.1"

@@ -8,6 +8,8 @@ const fs = require('fs');
 const {
   gql
 } = require('graphql-request');
+
+require('dotenv').config();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 let rolesToPing = [];
@@ -131,7 +133,6 @@ async function createPing(name, guild, user) {
   })
   giveRole(guild.members.cache.get(user.id), pingRole);
 }
-
 async function createAdmin(guild,user){
   var pingRole = await guild.roles.create({
     data: {
@@ -141,11 +142,9 @@ async function createAdmin(guild,user){
   })
   giveRole(guild.members.cache.get(user.id), pingRole);
 }
-
 function giveRole(member, role) {
   member.roles.add(role);
 }
-
 function removeRole(member, role) {
   member.roles.remove(role);
 }
@@ -234,25 +233,11 @@ function handleData(data) { //no longer used
   console.log(data.data.Media.nextAiringEpisode.timeUntilAiring);
   console.log(data.data.Media.title.english);
   var name = data.data.Media.title.english;
-  setTimeout(function() {ping(name)},data.data.Media.nextAiringEpisode.timeUntilAiring*1000);
+  setTimeout(function() {ping(name)},data.data.Media.nextAiringEpisode.timeUntilAiring*1000+3600);
   //console.log(data.data.title.english + ": " + data.data.Media.nextAiringEpisode.timeUntilAiring);
 }
 function handleError(error) {
   console.error(error);
 }
 
-
-
-// var myVar = setInterval(myTimer, 1000);
-
-// function myTimer() {
-//   var d = new Date();
-//   var t = d.toLocaleTimeString();
-//   document.getElementById("demo").innerHTML = t;
-// }
-
-// function myStopFunction() {
-//   clearInterval(myVar);
-// }
-
-client.login('Nzg4NTEyMjcxOTA2NTA0Nzc1.X9klRw.W1XH4Q2ZZ1ElInorZORLp4rH_5A');
+client.login(process.env.token);
