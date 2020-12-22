@@ -18,7 +18,6 @@ class animeInfo {
 
 
   apiRequest(name) { //get graphql request from anilist api
-    console.log("got request");
     const query = gql `
     query($search: String){
       Media(search: $search ,type:ANIME){
@@ -74,53 +73,46 @@ class animeInfo {
   }
   showInfo(data) { //sends embeded message to a channel
     const Discord = require("discord.js");
-    console.log("showing info");
     const crunchyroll = 'https://crunchyroll.com/';
     const path = data.data.Media;
-    var animeName = path.title.english;
-    //console.log("Title: " + animeName);
+    var animeName = " ";
+    animeName = path.title.english;
+    var description = " ";
+    description = path.description;
 
-    var description = path.description;
-
-    description = description.split(' ').slice(1, 5);
-
+    description = description.substring(0, 26);
     description += "...";
-    //console.log("Description: " + description);
+
+    var rawName = animeName.replace(' ', '-');
+    rawName = rawName.toLocaleLowerCase();
+    rawName = animeName.replace(' ', '-');
+
+    var rating = path.meanScore;
+    var thumbnail = path.coverImage.medium;
+    var complete = false;
     var episodes = "";
+
     try {
       if (path.episodes === null) {
         episodes = "*Episodes are still airing*";
       } else {
         episodes = path.episodes;
       }
-      console.log("Episodes: " + episodes);
     } catch {
       episodes = "*Episodes are still airing*";
-      console.log(episodes);
     }
 
-    var rating = path.meanScore;
-    //console.log("Rating: "+ rating);
-
-    var thumbnail = path.coverImage.medium;
-    //console.log("Thumbnail: " + thumbnail);
-
-    var status = path.status;
-    //console.log("Status: " + status);      
     var timeUntilAiring = "";
     try {
-
       timeUntilAiring = path.nextAiringEpisode.timeUntilAiring;
       timeUntilAiring /= 60;
-
-      //console.log("TimeUntilAiring: " +  Math.floor(timeUntilAiring/24/60) + "d " + Math.floor(timeUntilAiring/60%24) + 'h ' + Math.floor(timeUntilAiring % 60) + 'm ');
+      complete = true;
     } catch {
-      //console.log("Complete Anime");
       timeUntilAiring = "Complete Series";
+      complete = true;
     }
-    //this.apiRequest(name);
-    //console.log(animeName)
-    var stars = Math.round(rating / 25);
+
+    var stars = Math.round(rating / 20);
     var star = '';
     for (var i = 0; i < stars; i++) {
       star += '⭐';
@@ -129,22 +121,39 @@ class animeInfo {
     const eb = new Discord.MessageEmbed()
       .setColor(6617700)
       .setTitle(animeName)
-      .setURL(crunchyroll + "naruto")
+      .setURL(crunchyroll + rawName)
       .setDescription(description)
       .setThumbnail(thumbnail)
       .addField('Episodes:', episodes)
       .addField('Rating:', star);
     //⭐⭐⭐⭐⭐
+    //
     if (episodes === 'Complete Series') {
-      eb.setFooter('Complete Series');
+      eb.setFooter(episodes);
     } else {
       if (timeUntilAiring === "Complete Series") {
         eb.setFooter(timeUntilAiring);
+        complete = true;
       } else {
         eb.setFooter('Next Episode: ' + Math.round(timeUntilAiring / 24 / 60) + "d " + Math.round(timeUntilAiring / 60 % 24) + 'h ' + Math.round(timeUntilAiring % 60) + 'm ');
+        complete = false;
       }
     }
-    this.channel.send(eb);
+    this.channel.send(eb).then(message => {
+      console.log(complete);
+      if (!complete) {
+        console.log("Not Complete Series");
+
+        message.react('🔔');
+        message.react('🔕');
+      }else{
+        console.log("Complete Series");
+      }
+    });
+    //🔔
+    //🔕
+
+    //console.log(crunchyroll + rawName);
   }
 }
 
