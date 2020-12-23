@@ -293,5 +293,4 @@ function handleError(error) {
   console.error(error);
 }
 
-client.login("Nzg4NTEyMjcxOTA2NTA0Nzc1.X9klRw.NfpICiLnuoMdfmHBLdoGH403Q-M");
-//client.login(process.env.token);
+client.login(process.env.token);
