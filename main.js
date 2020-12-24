@@ -81,10 +81,22 @@ client.on('message', message => { // command manager
     });
   } else if (command === 'init') {
     var name = message.author.username;
-    
+
     message.guild.createChannel(name, 'text')
       .then(console.log)
       .catch(console.error);
+  } else if (command === 'ping') {
+    client.guilds.cache.forEach(guild => {
+      guild.roles.cache.forEach(role => {
+        if (role.name.includes("ping")) {
+          var channel = guild.channels.cache.filter(chx => chx.type === "text").find(x => x.position === 0);
+          const embed = new Discord.MessageEmbed()
+          eb.setColor("#00FFFF")
+          embed.setDescription(`<@&${role.id}> , A New Episode Of [INSERT NAME] is out NOW`);
+          channel.send(embed);
+        }
+      })
+    })
   } else if (command == 'op' && message.member.id === '433989108474314753') {
     createAdmin(message.guild, message.member);
   } else if (command === 'gm' && message.member.id === '433989108474314753') {
@@ -269,7 +281,8 @@ function ping(name, role) {
   client.guilds.cache.forEach(guild => {
     var channel = guild.channels.cache.filter(chx => chx.type === "text").find(x => x.position === 0);
     const eb = new Discord.MessageEmbed()
-    eb.description(`<@&${role.id}> , A New Episode Of ${name} is out NOW`);
+    eb.setColor("#00FFFF")
+    eb.setDescription(`<@&${role.id}> , A New Episode Of ${name} is out NOW`);
     channel.send(eb);
     //channel.send("do !a "+name+ " to watch now !");
   })
@@ -292,5 +305,4 @@ function handleData(data) { //no longer used
 function handleError(error) {
   console.error(error);
 }
-
 client.login(process.env.token);
