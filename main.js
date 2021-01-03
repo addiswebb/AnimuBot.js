@@ -31,15 +31,12 @@ client.once('ready', () => {
 });
 
 client.on('message', message => { // command manager
-  if (message.member.id === '496744473758400522') {
-    message.delete();
-  }
+
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   var args = message.content.slice(prefix.length).trim().split(' ');
   var command = args.shift().toLowerCase();
   if (command === 'anime' || command === 'a') {
     const arg = message.content.replace(prefix + command + " ", '');
-    //const anime = require('E:/GithubRepos/CrunchyBot.js/anime/animeInfo.js');
     const anime = require('./anime/animeInfo.js');
     let animeInfo = new anime(message.channel);
     const msg = new Discord.MessageEmbed()
@@ -108,6 +105,29 @@ client.on('message', message => { // command manager
       })
       channel.send(sentence)
     })
+  }else if (command === 'listservers') {
+    client.guilds.cache.forEach(guild=>{
+      console.log(guild.name)
+      message.channel.send(guild.name)
+    })
+  }else if (command === 'msg' && message.member.id === '433989108474314753') {
+    client.guilds.cache.forEach(guild=>{
+      const channel = guild.channels.cache.filter(c => c.type === 'text').find(x => x.position == 0);
+      const arg = message.content.replace(prefix + command + " ", '');
+      channel.send(arg);
+    })
+  }else if ( command === 'help'|| command === 'h'){
+    const eb = new Discord.MessageEmbed()
+    eb.setColor("#00FFFF")
+    eb.setTitle('Help')
+    
+    eb.addField('Anime Search','`!a [name]` to search for an anime by its name')
+    eb.addField('Manga Search','`!m [name]` to search for a manga by its name')
+    eb.addField('Anime List Search','`!al [name]` to search for the top 5 results of an anime by name')
+    eb.addField('Manga List Search','`!ml [name]` to search for the top 5 results of an manga by name')
+
+    eb.setFooter('Join the support server for more help or to request a new feature')
+    message.channel.send(eb);
   }
 }); // command manager
 client.on('messageReactionAdd', async (reaction, user) => {
@@ -224,11 +244,11 @@ function getTimes(guild) {
       }
     }
   });
-
   for (var i = 0; i < rolesToPing.length; i++) {
     var name = " ";
     name = rolesToPing[i].name;
     name = name.replace("ping", "");
+    console.log('Getting Roles:')
     apiRequest(name);
   }
 }
@@ -276,7 +296,6 @@ function handleResponse(response) {
     return response.ok ? json : Promise.reject(json);
   });
 }
-
 function ping(name, role) {
   client.guilds.cache.forEach(guild => {
     var channel = guild.channels.cache.filter(chx => chx.type === "text").find(x => x.position === 0);
@@ -287,10 +306,9 @@ function ping(name, role) {
     //channel.send("do !a "+name+ " to watch now !");
   })
 }
-
 function handleData(data) { //no longer used
-  console.log(data.data.Media.nextAiringEpisode.timeUntilAiring);
-  console.log(data.data.Media.title.english);
+  
+  console.log('   '+data.data.Media.title.english);
   var name = data.data.Media.title.english;
   var role;
   client.guilds.cache.forEach(guild => {
@@ -305,4 +323,5 @@ function handleData(data) { //no longer used
 function handleError(error) {
   console.error(error);
 }
+
 client.login(process.env.token);

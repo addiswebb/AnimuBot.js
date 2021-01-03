@@ -158,9 +158,7 @@ class animeInfo {
       return response.ok ? json : Promise.reject(json);
     });
   }
-  // handleData(data) { //no longer used
-  //     this.showInfo(title,description,episodes,rating,thumbnail,status,timeUntilAiring);
-  // }
+
   handleError(error) {
     console.error(error);
   }
@@ -179,24 +177,18 @@ class animeInfo {
         animeName = path.title.english;
         try {
           if (path.episodes === null) {
-            console.log("episodes are null");
             episodes = "*Episodes are still airing*";
           } else {
             episodes = path.episodes;
           }
         } catch {
-          console.log("caught episode err");
-
           episodes = "*Episodes are still airing*";
         }
         try {
-          console.log("Episodes are still airing");
           timeUntilAiring = path.nextAiringEpisode.timeUntilAiring;
           timeUntilAiring /= 60;
           complete = false;
         } catch {
-          console.log("caught anime seriers");
-
           timeUntilAiring = "Complete Anime Series";
           complete = true;
         }
@@ -204,17 +196,11 @@ class animeInfo {
         animeName = path.title.native;
         try {
           if (path.chapters === null) {
-            console.log("chapters are null");
-
             episodes = "*Chapters are still getting released*";
           } else {
-            console.log("chapters are not null");
-
             episodes = path.chapters;
           }
         } catch {
-          console.log("chapters are null");
-
           episodes = "*Chapters are still getting released*";
         }
         complete = true;
@@ -257,8 +243,6 @@ class animeInfo {
         if(!complete){
           e.react("🔔");
           e.react("🔕");
-        }else{
-          console.log("ongoing series");
         }
       });
     } else if (this.type === "ANIME_LIST" || this.type === "MANGA_LIST") {
