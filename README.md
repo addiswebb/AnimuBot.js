@@ -5,11 +5,11 @@
  >This bot allows you to find any anime or manga and all the information about it easily. You can subscribe to different >animes to get notified when they release a new episode.  And you can do this all easily within discord
 
  # Commands:
- >	*	`!h` 		  This shows all of the available commands
- >	*	`!a  [name]`  This shows the top result for naruto anima.
- >	* `!m  [name]`  This shows the top result for naruto manga.
- >	* `!al [name]`  This shows the top 5 results for naruto anime.  
- > * `!ml [name]`  This shows the top 5 results for naruto manga.
+ 	*	`!h` 		  This shows all of the available commands
+ 	*	`!a  [name]`  This shows the top result for naruto anima.
+ 	* `!m  [name]`  This shows the top result for naruto manga.
+ 	* `!al [name]`  This shows the top 5 results for naruto anime.  
+  * `!ml [name]`  This shows the top 5 results for naruto manga.
 
  # Help
 
