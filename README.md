@@ -3,7 +3,7 @@
  # Description:
  
  >This bot allows you to find any anime or manga and all the information about it easily. \
- You can subscribe to different >animes to get notified when they release a new episode. \
+ You can subscribe to different animes to get notified when they release a new episode. \
  And you can do this all easily within discord.
 
  # Commands:
@@ -28,4 +28,5 @@
   > It is really messy and undocumented because im new to js. \
   
   >Discord: Voi#9991 \
+  
    *this bot uses the anilist api btw* \
