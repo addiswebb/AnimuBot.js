@@ -21,11 +21,11 @@
  *this bot uses the anilist api btw*
  
  # Other
-  > I am the creater of this bot and this is my code.
-  > This bot is made in `Node.js`
-  > You may **NOT** use this code to **recreate** or **republish** my bot,
-  > You may use this code to **learn** from.
-  > It is really messy and undocumented because im new to js.
-  > If you are not sure if your usecase fits these rules you can contact my via discord
+  > I am the creater of this bot and this is my code.\
+  > This bot is made in `Node.js`\
+  > You may **NOT** use this code to **recreate** or **republish** my bot,\
+  > You may use this code to **learn** from.\
+  > It is really messy and undocumented because im new to js.\
+  > If you are not sure if your usecase fits these rules you can contact my via discord\
   
   >Discord: Voi#9991
