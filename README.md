@@ -13,12 +13,9 @@
 
  # Help
 
- >If you need help with anything or want to make requests, join the support server and @ me
-
- > Support Server: https://discord.gg/ 
- 
- > Top.GG: https://top.gg/bot/788512271906504775/
- *this bot uses the anilist api btw*
+ >If you need help with anything or want to make requests, join the support server and @ me\
+ > Support Server: https://discord.gg/ \
+ > Top.GG: https://top.gg/bot/788512271906504775/ \
  
  # Other
   > I am the creater of this bot and this is my code.\
@@ -28,4 +25,5 @@
   > It is really messy and undocumented because im new to js.\
   > If you are not sure if your usecase fits these rules you can contact my via discord\
   
+   *this bot uses the anilist api btw*\
   >Discord: Voi#9991
