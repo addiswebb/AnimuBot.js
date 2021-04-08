@@ -49,15 +49,8 @@ const CRSimulcast =['ABCiee Working Diary',
 'Yashahime: Princess Half-Demon',
 'Yatogame-chan Kansatsu Nikki 3']
 
-
 client.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 let rolesToPing = [];
-
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`)
-  client.commands.set(command.name, command);
-}
 
 client.once('ready', () => {
   console.log('Starting Guild Checks')
@@ -89,7 +82,7 @@ client.on('message', message => { // command manager
   var command = args.shift().toLowerCase();
   if (command === 'anime' || command === 'a') {
     const arg = message.content.replace(prefix + command + " ", '');
-    const anime = require('./anime/animeInfo.js');
+    const anime = require('./animeInfo.js');
     let animeInfo = new anime(message.channel);
     const msg = new Discord.MessageEmbed()
       .setColor("#00FF00")
@@ -100,7 +93,7 @@ client.on('message', message => { // command manager
   } else if (command === 'manga' || command === 'm') {
     const arg = message.content.replace(prefix + command + " ", '');
     //const anime = require('E:/GithubRepos/CrunchyBot.js/anime/animeInfo.js');
-    const anime = require('./anime/animeInfo.js');
+    const anime = require('./animeInfo.js');
     let animeInfo = new anime(message.channel);
     const msg = new Discord.MessageEmbed()
       .setColor("#00FFFF")
@@ -110,7 +103,7 @@ client.on('message', message => { // command manager
     });
   } else if (command === 'animelist' || command === 'al') {
     const arg = message.content.replace(prefix + command + " ", '');
-    const anime = require('./anime/animeInfo.js');
+    const anime = require('./animeInfo.js');
     let animeInfo = new anime(message.channel);
     const msg = new Discord.MessageEmbed()
       .setColor("#00FFFF")
@@ -121,7 +114,7 @@ client.on('message', message => { // command manager
 
   } else if (command === 'mangalist' || command === 'ml') {
     const arg = message.content.replace(prefix + command + " ", '');
-    const anime = require('./anime/animeInfo.js');
+    const anime = require('./animeInfo.js');
     let animeInfo = new anime(message.channel);
     const msg = new Discord.MessageEmbed()
       .setColor("#00FFFF")
@@ -495,5 +488,8 @@ function handlePingData(data) { //no longer used
 function handleError(error) {
   console.error(error);
 }
-client.login('Nzg4NTEyMjcxOTA2NTA0Nzc1.X9klRw.gC5iSQ52M-hMmWTxJbqid6ZVrzk');
-//client.login(process.env.token);
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+client.login(process.env.TOKEN);
