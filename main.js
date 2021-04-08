@@ -13,7 +13,6 @@ const config = require('dotenv').config();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 let rolesToPing = [];
-let pingRoles = [];
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`)
