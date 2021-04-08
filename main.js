@@ -1,3 +1,5 @@
+// Code by Addis Web
+
 const Discord = require('discord.js');
 const client = new Discord.Client;
 
