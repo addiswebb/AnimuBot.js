@@ -1,18 +1,32 @@
 {
-  "name": "crunchybot",
-  "version": "1.0.0",
+  "name": "Animu",
+  "version": "1.1.0",
   "description": "Anime bot for discord",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .main.js",
+    "build": "nexe"
   },
   "author": "Addis",
   "license": "ISC",
   "dependencies": {
+    "2captcha": "^2.1.5-2",
+    "@ablanc/crunchyroll": "^2.4.0",
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.5",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "graphql": "^15.4.0",
     "graphql-request": "^3.4.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "pm2": "^4.5.1",
+    "puppeteer": "^6.0.0",
+    "puppeteer-extra": "^3.1.16",
+    "puppeteer-extra-plugin-recaptcha": "^3.3.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nexe": "^4.0.0-beta.16"
   }
 }
